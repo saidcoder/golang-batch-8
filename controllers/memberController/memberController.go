@@ -49,23 +49,23 @@ func Create(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"member": member})
 }
 
-// // Update mengupdate data Event berdasarkan ID yang diberikan dengan data JSON yang diterima.
-// func Update(c *gin.Context) {
-// 	var event models.Event
-// 	id := c.Param("id")
+// Update mengupdate data Member berdasarkan ID yang diberikan dengan data JSON yang diterima.
+func Update(c *gin.Context) {
+	var member models.Member
+	id := c.Param("id")
 
-// 	if err := c.ShouldBindJSON(&event); err != nil {
-// 		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"message": err.Error()})
-// 		return
-// 	}
+	if err := c.ShouldBindJSON(&member); err != nil {
+		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"message": err.Error()})
+		return
+	}
 
-// 	if models.DB.Model(&event).Where("id = ?", id).Updates(&event).RowsAffected == 0 {
-// 		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"message": "Tidak dapat mengupdate Event"})
-// 		return
-// 	}
+	if config.DB.Model(&member).Where("id = ?", id).Updates(&member).RowsAffected == 0 {
+		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"message": "Tidak dapat mengupdate Member"})
+		return
+	}
 
-// 	c.JSON(http.StatusOK, gin.H{"message": "Data berhasil diperbarui"})
-// }
+	c.JSON(http.StatusOK, gin.H{"message": "Data berhasil diperbarui"})
+}
 
 // Delete menghapus data Book berdasarkan ID yang diberikan.
 func Delete(c *gin.Context) {
